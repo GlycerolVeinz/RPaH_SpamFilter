@@ -18,9 +18,9 @@ class BasicFilter(abc.ABC):
             # if it isn't a special file
             if (a_file.find('!') == 0):
                 pass
-            # naivly categorize email as "OK"
+            # categorize email as write_class
             else:
-                email_classes[a_file] = "OK"
+                email_classes[a_file] = write_class
         
         # write that down to a !prediction.txt file
         write_classification_to_file(path_to_mails / "!prediction.txt", email_classes)
@@ -30,6 +30,6 @@ class BasicFilter(abc.ABC):
         pass
 
 class NaiveFilter(BasicFilter):
-    
+
     def test(self, path_to_mails):
         self.universal_test(path_to_mails, "OK")
