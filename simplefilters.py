@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 from utils import write_classification_to_file
 import abc
+from random import choice
 
 class BasicFilter(abc.ABC):
 
@@ -39,4 +40,7 @@ class ParanoidFilter(BasicFilter):
     def test(self, path_to_mails):
         self.universal_test(path_to_mails, "SPAM")
 
+class RandomFilter(BasicFilter):
 
+    def test(self, path_to_mails):
+        self.universal_test(path_to_mails, choice(["OK","SPAM"]))
