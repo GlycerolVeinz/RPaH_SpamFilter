@@ -28,3 +28,8 @@ class BasicFilter(abc.ABC):
     @abc.abstractmethod
     def test(self, path_to_mails):
         pass
+
+class NaiveFilter(BasicFilter):
+    
+    def test(self, path_to_mails):
+        self.universal_test(path_to_mails, "OK")
