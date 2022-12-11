@@ -33,3 +33,10 @@ class NaiveFilter(BasicFilter):
 
     def test(self, path_to_mails):
         self.universal_test(path_to_mails, "OK")
+
+class ParanoidFilter(BasicFilter):
+
+    def test(self, path_to_mails):
+        self.universal_test(path_to_mails, "SPAM")
+
+
