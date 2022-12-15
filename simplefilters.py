@@ -9,7 +9,11 @@ class BasicFilter(abc.ABC):
     def train(self, path_to_mails: str):
         pass
 
-    def universal_test(self, path_to_mails: str, write_class: str):
+    @abc.abstractmethod
+    def decide_class():
+        pass
+
+    def universal_test(self, path_to_mails: str):
         path_to_mails = Path(path_to_mails)
 
         email_classes = dict()
@@ -21,7 +25,7 @@ class BasicFilter(abc.ABC):
                 pass
             # categorize email as write_class
             else:
-                email_classes[a_file] = write_class
+                email_classes[a_file] = self.decide_class
         
         # write that down to a !prediction.txt file
         write_classification_to_file(path_to_mails / "!prediction.txt", email_classes)
@@ -32,15 +36,24 @@ class BasicFilter(abc.ABC):
 
 class NaiveFilter(BasicFilter):
 
+    def decide_class():
+        return "OK"
+
     def test(self, path_to_mails):
-        self.universal_test(path_to_mails, "OK")
+        self.universal_test(path_to_mails)
 
 class ParanoidFilter(BasicFilter):
 
+    def decide_class():
+        return "SPAM"
+
     def test(self, path_to_mails):
-        self.universal_test(path_to_mails, "SPAM")
+        self.universal_test(path_to_mails)
 
 class RandomFilter(BasicFilter):
 
+    def decide_class():
+        return choice(["OK","SPAM"])
+
     def test(self, path_to_mails):
-        self.universal_test(path_to_mails, choice(["OK","SPAM"]))
+        self.universal_test(path_to_mails)
