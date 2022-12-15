@@ -6,6 +6,8 @@ class MyFilter(BasicFilter):
     def train(self, path_to_mails: str):
         # path to mails need to have !truth.txt
         # need to check if key-words appear in mails (like porn, african prince etc.)
+            #* tokens:
+            #* adult, prince, money, cash, girl, women, lonely mom, 
         # should create workflow for test()
 
         return super().train(path_to_mails)
