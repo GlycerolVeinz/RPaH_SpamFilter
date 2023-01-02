@@ -4,7 +4,7 @@ from simplefilters import BasicFilter
 class MyFilter(BasicFilter):
 
     def __init__(self):
-        self.spamwords = ["adult", "prince", "money", "cash", "girl", "women", "mom", "xxx", "lonely", "porn", "treasure", "special offer", "karma", "prediction", "savings", "cheating", "order now", "weight loss", "hot"]
+        self.spamwords = ["adult", "prince", "money", "cash", "girl", "women", "mom", "xxx", "lonely", "porn", "treasure", "lottery", "special offer", "karma", "prediction", "savings", "cheating", "order now", "weight loss", "hot"]
 
     def train(self, path_to_mails: str):
         # path to mails need to have !truth.txt
