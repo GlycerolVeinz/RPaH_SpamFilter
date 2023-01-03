@@ -1,24 +1,42 @@
+import email
+from email.message import EmailMessage
+import os
 from pathlib import Path
-from simplefilters import BasicFilter
+from basefilter import BasicFilter
 
 class MyFilter(BasicFilter):
 
     def __init__(self):
-        self.spamwords = ["adult", "prince", "money", "cash", "girl", "women", "mom", "xxx", "lonely", "porn", "treasure", "lottery", "special offer", "karma", "prediction", "savings", "cheating", "order now", "weight loss", "hot"]
+        self.spamwords = ["Adult", "Prince", "Money", "Cash", "Girl", "Women", "Mom", "Xxx", "Lonely", "Porn", "Treasure", "Lottery", "Special Offer", "Karma", "Prediction", "Savings", "Cheating", "Order Now", "Weight Loss", "Hot"]
 
-    def train(self, path_to_mails: str):
-        # path to mails need to have !truth.txt
-        # need to check if key-words appear in mails (like porn, african prince etc.)
-            #* tokens:
-            #* adult, prince, money, cash, girl, women, mom, xxx, lonely
-            #* tokens should be in __init__ as list/dictionary
-        # should create workflow for test()
-
-        return super().train(path_to_mails)
-
+    def train(self, path_to_mails):
+        path_to_mails = Path(path_to_mails)
+        pass
 
     def test(self, path_to_mails):
         # creates !prediction.txt in path_to_mails
         # implement as last fce
         # will run through the mails, and search for key-words that train() has found
-        return super().test(path_to_mails)
+        path_to_mails = Path(path_to_mails)
+
+        for a_file in os.listdir(path_to_mails):
+            # if it isn't a special file
+            if (a_file.find('!') == 0):
+                pass
+            # categorize email as write_class
+            else:
+                msg = email.message_from_file(a_file)
+                body = msg.get_body()
+
+                for word in self.spamwords:
+                    if body.find(word.lower) !=-1 or body.find(word.upper) !=-1 or body.find(word) !=-1:
+                        def decide_class():
+                            return "SPAM"
+                    else:
+                        def decide_class():
+                            return "OK"
+
+        self.universal_test(path_to_mails)
+
+
+        # return super().test(path_to_mails)
