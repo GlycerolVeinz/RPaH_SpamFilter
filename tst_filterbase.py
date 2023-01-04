@@ -12,7 +12,7 @@ from test_corpus import (
     create_corpus_dictionary, 
     create_corpus_dir_from_dictionary)
 
-CORPUS_DIR = 'corpus_for_testing_delete_me'
+CORPUS_DIR = './corpus_for_testing_delete_me'
 HAM_TAG = 'OK'
 SPAM_TAG = 'SPAM'
 TRUTH_FILENAME = '!truth.txt'
