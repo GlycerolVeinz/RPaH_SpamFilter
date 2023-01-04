@@ -15,3 +15,11 @@ def write_classification_to_file(class_file: str, email_types: dict):
 
         for i in email_types.keys():
             a_file.write(f"{i} {email_types[i]}\n")
+
+def read_spamwords():
+    sp_words = list()
+    with open("./spamwords.txt", "r", encoding="utf-8") as sp_file:
+        for line in sp_file:
+            line = line.replace('\n', '')
+            sp_words.append(str(line))
+    return sp_words
