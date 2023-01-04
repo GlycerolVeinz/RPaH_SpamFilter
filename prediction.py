@@ -1,35 +1,39 @@
 import os
+from pathlib import Path
 from utils import (write_classification_to_file)
 
+spam_tag = "SPAM"
+ham_tag = "OK"
 
-def create_prediction(path_to_mails: str, spam_words: list):
-    
+def create_prediction(mails_path: str, spam_words: list):
+    # make os universal paths
+    mails_path = Path(mails_path)
+    prediction_path = (mails_path / "!prediction.txt")
+
+    # pre-gen lists and dicts
     email_types = dict()
+    emails_list = os.listdir(mails_path)
 
-    for a_file in os.listdir(path_to_mails):
-            # if it isn't a special file
-            if (a_file.find('!') == 0):
-                pass
+    # for every email in path to mails
+    for cur_mail in email_types:
+        cur_mail_path = (mails_path / cur_mail)
 
-            # categorize email as ham / spam
-            else:
-                with open((path_to_mails / a_file), 'r', encoding='utf-8') as cur_mail:
-                    msg = cur_mail.read()
-                    msg = msg.lower()
+        # if it isn special file, skip it
+        if (cur_mail.find('!') == 0):
+            continue
 
-                    for word in spam_words:
-                        if msg.find(word) != -1:
+        # categorize email as ham / spam
+        with open(cur_mail_path, 'r', encoding='utf-8') as opened_mail:
+            msg = opened_mail.read()
+            msg = msg.lower()
 
-                            def decide_class():
-                                return "SPAM"
+            for word in spam_words:
+                if msg.find(word) != -1:
+                    decide_type = spam_tag
 
-                            break
-                        else:
+                else:
+                    decide_type = ham_tag
 
-                            def decide_class():
-                                return "OK"
+            email_types[cur_mail] = decide_type
 
-                    email_types[a_file] = decide_class()
-
-                    write_classification_to_file(
-                        (path_to_mails / "!prediction.txt"), email_types) 
+            write_classification_to_file(prediction_path, email_types) 

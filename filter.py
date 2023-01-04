@@ -15,6 +15,4 @@ class MyFilter:
 
     def test(self, path_to_mails:str):
         '''creates !prediction.txt in path_to_mails'''
-        path_to_mails = Path(path_to_mails)
-
         create_prediction(path_to_mails, self.spamwords)
