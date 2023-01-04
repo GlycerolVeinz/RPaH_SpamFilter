@@ -1,24 +1,18 @@
+import os
 from pathlib import Path
-from simplefilters import BasicFilter
+from utils import (write_classification_to_file, read_spamwords)
+from prediction import create_prediction
 
-class MyFilter(BasicFilter):
 
+class MyFilter:
+    '''spam-filter that searches for spam-words, to decide email type'''
     def __init__(self):
-        self.spamwords = ["adult", "prince", "money", "cash", "girl", "women", "mom", "xxx", "lonely", "porn", "treasure", "lottery", "special offer", "karma", "prediction", "savings", "cheating", "order now", "weight loss", "hot"]
+        self.spamwords = read_spamwords()
 
-    def train(self, path_to_mails: str):
-        # path to mails need to have !truth.txt
-        # need to check if key-words appear in mails (like porn, african prince etc.)
-            #* tokens:
-            #* adult, prince, money, cash, girl, women, mom, xxx, lonely
-            #* tokens should be in __init__ as list/dictionary
-        # should create workflow for test()
+    def train(self, path_to_mails):
+        #  our spfilter doesn't learn or tarin itself
+        pass
 
-        return super().train(path_to_mails)
-
-
-    def test(self, path_to_mails):
-        # creates !prediction.txt in path_to_mails
-        # implement as last fce
-        # will run through the mails, and search for key-words that train() has found
-        return super().test(path_to_mails)
+    def test(self, path_to_mails: str):
+        '''creates !prediction.txt in path_to_mails'''
+        create_prediction(path_to_mails, self.spamwords)
