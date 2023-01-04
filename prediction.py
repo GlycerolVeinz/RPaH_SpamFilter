@@ -15,7 +15,7 @@ def create_prediction(mails_path: str, spam_words: list):
     emails_list = os.listdir(mails_path)
 
     # for every email in path to mails
-    for cur_mail in email_types:
+    for cur_mail in emails_list:
         cur_mail_path = (mails_path / cur_mail)
 
         # if it isn special file, skip it

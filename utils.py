@@ -1,7 +1,7 @@
 
 def read_spamwords():
     '''create list of spamwords from a spamwords.txt file'''
-    with open("./spamwords.txt", "r", encoding="utf-8") as sp_file:
+    with open("spamwords.txt", "r", encoding="utf-8") as sp_file:
         # read whole file, then split on "new line"
         sp_words = sp_file.read()
         sp_words = sp_words.split("\n")
