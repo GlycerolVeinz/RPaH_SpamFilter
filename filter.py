@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     from quality import compute_quality_for_corpus
     import simplefilters
-    CORPUS_DIR = "./spam-data-12-s75-h25(1)/2/"
+    CORPUS_DIR = "./spam-data-12-s75-h25(1)/1/"
     CORPUS_DIR = Path(CORPUS_DIR)
 
     def qute_fltr(fltr):
