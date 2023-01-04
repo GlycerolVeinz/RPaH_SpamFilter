@@ -1,5 +1,3 @@
-import os
-from pathlib import Path
 from utils import (write_classification_to_file, read_spamwords)
 from prediction import create_prediction
 
