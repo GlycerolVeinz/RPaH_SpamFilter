@@ -21,29 +21,25 @@ if __name__ == "__main__":
 
     from quality import compute_quality_for_corpus
     import simplefilters
+    CORPUS_DIR = "./spam-data-12-s75-h25(1)/2/"
+    CORPUS_DIR = Path(CORPUS_DIR)
 
     def qute_fltr(fltr):
-        CORPUS_DIR = "./spam-data-12-s75-h25(1)/2/"
-        CORPUS_DIR = Path(CORPUS_DIR)
         fltr.test(CORPUS_DIR)
         print(compute_quality_for_corpus(CORPUS_DIR))
         rmtree((CORPUS_DIR / "!prediction.txt"), ignore_errors=True)
 
-    # filtr = MyFilter()
-    # qute_fltr(filtr)
-
-    # filtr = simplefilters.NaiveFilter()
-    # qute_fltr(filtr)
-
+    filtr = MyFilter()
+    qute_fltr(filtr)
 
     filtr = simplefilters.NaiveFilter()
     qute_fltr(filtr)
 
-    # filtr = simplefilters.ParanoidFilter()
-    # qute_fltr(filtr)
+    filtr = simplefilters.ParanoidFilter()
+    qute_fltr(filtr)
 
-    # filtr = simplefilters.RandomFilter()
-    # qute_fltr(filtr)
+    filtr = simplefilters.RandomFilter()
+    qute_fltr(filtr)
 
     
 

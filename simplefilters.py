@@ -9,11 +9,8 @@ SPAM_TAG = "SPAM"
 
 class BasicFilter(abc.ABC):
 
-    def train(self, path_to_mails: str):
-        pass
-
     # @abc.abstractmethod
-    def decide_class():
+    def decide_class(self):
         pass
 
     def universal_test(self, path_to_mails: str):
@@ -28,7 +25,7 @@ class BasicFilter(abc.ABC):
                 pass
             # categorize email as write_class
             else:
-                email_classes[a_file] = self.decide_class
+                email_classes[a_file] = self.decide_class()
         
         # write that down to a !prediction.txt file
         write_classification_to_file(path_to_mails / "!prediction.txt", email_classes)
@@ -39,7 +36,7 @@ class BasicFilter(abc.ABC):
 
 class NaiveFilter(BasicFilter):
 
-    def decide_class():
+    def decide_class(self):
         return HAM_TAG
 
     def test(self, path_to_mails):
@@ -47,7 +44,7 @@ class NaiveFilter(BasicFilter):
 
 class ParanoidFilter(BasicFilter):
 
-    def decide_class():
+    def decide_class(self):
         return SPAM_TAG
 
     def test(self, path_to_mails):
@@ -55,7 +52,7 @@ class ParanoidFilter(BasicFilter):
 
 class RandomFilter(BasicFilter):
 
-    def decide_class():
+    def decide_class(self):
         return choice([HAM_TAG,SPAM_TAG])
 
     def test(self, path_to_mails):
