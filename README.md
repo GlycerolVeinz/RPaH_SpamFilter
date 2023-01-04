@@ -8,4 +8,5 @@ and tags it based on what it found (no spam-words = ham, and vice versa).
 
 team:
 Matvej Safrankov (saframa9)
+Nadzeya Shchahlova (shchanad)
 
