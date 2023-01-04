@@ -4,12 +4,15 @@ from utils import write_classification_to_file
 import abc
 from random import choice
 
+HAM_TAG = "OK"
+SPAM_TAG = "SPAM"
+
 class BasicFilter(abc.ABC):
 
     def train(self, path_to_mails: str):
         pass
 
-    @abc.abstractmethod
+    # @abc.abstractmethod
     def decide_class():
         pass
 
@@ -30,14 +33,14 @@ class BasicFilter(abc.ABC):
         # write that down to a !prediction.txt file
         write_classification_to_file(path_to_mails / "!prediction.txt", email_classes)
 
-    @abc.abstractmethod
+    # @abc.abstractmethod
     def test(self, path_to_mails):
         pass
 
 class NaiveFilter(BasicFilter):
 
     def decide_class():
-        return "OK"
+        return HAM_TAG
 
     def test(self, path_to_mails):
         self.universal_test(path_to_mails)
@@ -45,7 +48,7 @@ class NaiveFilter(BasicFilter):
 class ParanoidFilter(BasicFilter):
 
     def decide_class():
-        return "SPAM"
+        return SPAM_TAG
 
     def test(self, path_to_mails):
         self.universal_test(path_to_mails)
@@ -53,7 +56,7 @@ class ParanoidFilter(BasicFilter):
 class RandomFilter(BasicFilter):
 
     def decide_class():
-        return choice(["OK","SPAM"])
+        return choice([HAM_TAG,SPAM_TAG])
 
     def test(self, path_to_mails):
         self.universal_test(path_to_mails)
